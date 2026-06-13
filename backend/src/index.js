@@ -16,7 +16,7 @@ require("node:dns/promises").setServers(["8.8.8.8", "1.1.1.1"]);
 
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://leetcode-f0400bvds-subhamgayen802-4438s-projects.vercel.app/',
     credentials: true 
 }))
 
