@@ -15,10 +15,25 @@ require("node:dns/promises").setServers(["8.8.8.8", "1.1.1.1"]);
 
 
 
+const ALLOWED_ORIGINS = [
+  "https://leetcode-omega-five.vercel.app",
+  "http://localhost:5173",
+];
+
 app.use(cors({
-    origin: 'https://leetcode-f0400bvds-subhamgayen802-4438s-projects.vercel.app',
-    credentials: true 
-}))
+  origin: (origin, callback) => {
+    if (
+      !origin ||
+      ALLOWED_ORIGINS.includes(origin) ||
+      origin.endsWith(".vercel.app") 
+    ) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+}));
 
 app.use(express.json());
 app.use(cookieParser());
