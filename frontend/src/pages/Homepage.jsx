@@ -9,7 +9,7 @@ function Homepage() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
 
-  // Redux problems data
+
   const { data: problems = [], loading } = useSelector((state) => state.problems);
 
   const [solvedProblems, setSolvedProblems] = useState([]);
@@ -17,10 +17,9 @@ function Homepage() {
     difficulty: 'all',
     tag: 'all',
     status: 'all',
-    search: '' // Modern search filter
+    search: '' 
   });
 
-  // State for the preview drawer
   const [selectedProblem, setSelectedProblem] = useState(null);
 
   useEffect(() => {
@@ -43,7 +42,7 @@ function Homepage() {
     handleLogout();
   };
 
-  // Filter logic
+  
   const filteredProblems = problems.filter(problem => {
     const difficultyMatch = filters.difficulty === 'all' || problem.difficulty.toLowerCase() === filters.difficulty.toLowerCase();
     const tagMatch = filters.tag === 'all' || (problem.tags && problem.tags.toLowerCase() === filters.tag.toLowerCase());
@@ -57,7 +56,6 @@ function Homepage() {
     return difficultyMatch && tagMatch && statusMatch && searchMatch;
   });
 
-  // Statistics calculation
   const totalProblemsCount = problems.length;
   const solvedProblemsCount = solvedProblems.length;
   const solveRate = totalProblemsCount ? Math.round((solvedProblemsCount / totalProblemsCount) * 100) : 0;
@@ -94,7 +92,7 @@ function Homepage() {
               <ul tabIndex={0} className="mt-3 p-2 shadow-xl menu menu-sm dropdown-content bg-[#18181B] border border-[#27272A] rounded-lg w-52 text-[#E4E4E7]">
                 <li className="px-4 py-2 border-b border-[#27272A] mb-1">
                   <p className="text-xs text-zinc-500">Signed in as</p>
-                  <p className="font-semibold text-zinc-200 truncate">{user.email || 'User'}</p>
+                  <p className="font-semibold text-zinc-200 truncate">{user.emailId}</p>
                 </li>
                 {user.role === 'admin' && (
                   <li>
