@@ -1,27 +1,34 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axiosClient from './utils/axiosClient'
+import axiosClient from '../src/utils/axiosClient'
 
-export const registerUser = createAsyncThunk(
-  'auth/register',
-  async (userData, { rejectWithValue }) => {
-    try {
-    const response =  await axiosClient.post('/user/register', userData);
-    return response.data.user;
-    } catch (error) {
-      return rejectWithValue(error);
-    }
-  }
-);
 
 
 export const loginUser = createAsyncThunk(
   'auth/login',
   async (credentials, { rejectWithValue }) => {
     try {
-      const response = await axiosClient.post('/user/login', credentials);
+      const response = await axiosClient.post('/login', credentials);
+      // ✅ token সেভ করো
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
       return response.data.user;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(error.response?.data || "Login failed");
+    }
+  }
+);
+
+export const registerUser = createAsyncThunk(
+  'auth/register',
+  async (userData, { rejectWithValue }) => {
+    try {
+      const response = await axiosClient.post('/register', userData);
+      // ✅ token সেভ করো
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      return response.data.user;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || "Register failed");
     }
   }
 );
@@ -30,13 +37,17 @@ export const checkAuth = createAsyncThunk(
   'auth/check',
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await axiosClient.get('/user/check');
+      const { data } = await axiosClient.get('/check');
+      // ✅ নতুন token সেভ করো
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+      }
       return data.user;
     } catch (error) {
       if (error.response?.status === 401) {
-        return rejectWithValue(null); // Special case for no session
+        return rejectWithValue(null);
       }
-      return rejectWithValue(error);
+      return rejectWithValue(error.response?.data);
     }
   }
 );
@@ -45,7 +56,7 @@ export const logoutUser = createAsyncThunk(
   'auth/logout',
   async (_, { rejectWithValue }) => {
     try {
-      await axiosClient.post('/user/logout');
+      await axiosClient.post('/logout');
       return null;
     } catch (error) {
       return rejectWithValue(error);

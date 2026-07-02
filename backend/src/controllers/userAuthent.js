@@ -9,7 +9,7 @@ const Submission = require("../models/submission")
 const register = async (req,res)=>{
     
     try{
-        // validate the data;
+  
 
       validate(req.body); 
       const {firstName, emailId, password}  = req.body;
@@ -76,7 +76,7 @@ const login = async (req,res)=>{
 }
 
 
-// logOut feature
+
 
 const logout = async(req,res)=>{
 
@@ -87,8 +87,7 @@ const logout = async(req,res)=>{
 
         await redisClient.set(`token:${token}`,'Blocked');
         await redisClient.expireAt(`token:${token}`,payload.exp);
-    //    Token add kar dung Redis ke blockList
-    //    Cookies ko clear kar dena.....
+   
 
     res.cookie("token",null,{expires: new Date(Date.now())});
     res.send("Logged Out Succesfully");
@@ -102,9 +101,7 @@ const logout = async(req,res)=>{
 
 const adminRegister = async(req,res)=>{
     try{
-        // validate the data;
-    //   if(req.result.role!='admin')
-    //     throw new Error("Invalid Credentials");  
+       
       validate(req.body); 
       const {firstName, emailId, password}  = req.body;
 
@@ -129,9 +126,9 @@ const deleteProfile = async(req,res)=>{
     // userSchema delete
     await User.findByIdAndDelete(userId);
 
-    // Submission se bhi delete karo...
+    // Submission se bhi delete ...
     
-    // await Submission.deleteMany({userId});
+ 
     
     res.status(200).send("Deleted Successfully");
 

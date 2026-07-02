@@ -4,9 +4,8 @@ const axios = require('axios');
 const getLanguageById = (lang)=>{
 
     const language = {
-        "c++":54,
-        "java":62,
-        "javascript":63
+      "javascript":63,
+      "python": 71
     }
 
 
@@ -111,7 +110,5 @@ module.exports = {getLanguageById,submitBatch,submitToken};
 
 
 
-
-// 
 
 

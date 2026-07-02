@@ -1,6 +1,5 @@
 const express = require('express')
 const app = express();
-require('dotenv').config();
 const main =  require('./config/db')
 const cookieParser =  require('cookie-parser');
 const authRouter = require("./routes/userAuth");
@@ -8,21 +7,23 @@ const redisClient = require('./config/redis');
 const problemRouter = require("./routes/problemCreator");
 const submitRouter = require("./routes/submit")
 const aiRouter = require("./routes/aiChatting")
+const rateLimiter = require("./middleware/rateLimiter")
 const videoRouter = require("./routes/videoCreator");
 const cors = require('cors');
+require('dotenv').config();
 require("node:dns/promises").setServers(["8.8.8.8", "1.1.1.1"]);
 
-// console.log("Hello")
 
 app.use(cors({
-    origin: 'http://localhost:5173',
-    credentials: true 
-}))
+    origin: 'http://localhost:5173', // Your frontend port (Vite default)
+    credentials: true, // Important for cookies
+}));
 
+app.use(rateLimiter);
 app.use(express.json());
 app.use(cookieParser());
 
-app.use('/user',authRouter);
+app.use(authRouter);
 app.use('/problem',problemRouter);
 app.use('/submission',submitRouter);
 app.use('/ai',aiRouter);

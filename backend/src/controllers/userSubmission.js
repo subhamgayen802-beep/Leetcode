@@ -5,7 +5,7 @@ const {getLanguageById,submitBatch,submitToken} = require("../utils/problemUtili
 
 const submitCode = async (req,res)=>{
    
-    // 
+
     try{
       
        const userId = req.result._id;
@@ -23,10 +23,8 @@ const submitCode = async (req,res)=>{
       console.log(language);
       
     //    Fetch the problem from database
-       const problem =  await Problem.findById(problemId);
-    //    testcases(Hidden)
+    const problem =  await Problem.findById(problemId);
     
-    //   Kya apne submission store kar du pehle....
     const submittedResult = await Submission.create({
           userId,
           problemId,
@@ -36,7 +34,6 @@ const submitCode = async (req,res)=>{
           testCasesTotal:problem.hiddenTestCases.length
      })
 
-    //    Judge0 code ko submit karna hai
     
     const languageId = getLanguageById(language);
    
@@ -55,7 +52,6 @@ const submitCode = async (req,res)=>{
     const testResult = await submitToken(resultToken);
     
 
-    // submittedResult ko update karo
     let testCasesPassed = 0;
     let runtime = 0;
     let memory = 0;
@@ -90,9 +86,7 @@ const submitCode = async (req,res)=>{
 
     await submittedResult.save();
     
-    // ProblemId ko insert karenge userSchema ke problemSolved mein if it is not persent there.
     
-    // req.result == user Information
 
     if(!req.result.problemSolved.includes(problemId)){
       req.result.problemSolved.push(problemId);
@@ -110,14 +104,14 @@ const submitCode = async (req,res)=>{
        
     }
     catch(err){
-      res.status(500).send("Internal Server Error "+ err);
+      res.status(500).send("Sorry We Dont Have a judge0 Submission key "+ err);
     }
 }
 
 
 const runCode = async(req,res)=>{
     
-     // 
+  
      try{
       const userId = req.result._id;
       const problemId = req.params.id;
@@ -127,13 +121,13 @@ const runCode = async(req,res)=>{
      if(!userId||!code||!problemId||!language)
        return res.status(400).send("Some field missing");
 
-   //    Fetch the problem from database
+
       const problem =  await Problem.findById(problemId);
-   //    testcases(Hidden)
+
       if(language==='cpp')
         language='c++'
 
-   //    Judge0 code ko submit karna hai
+
 
    const languageId = getLanguageById(language);
 
@@ -191,25 +185,3 @@ const runCode = async(req,res)=>{
 
 
 module.exports = {submitCode,runCode};
-
-
-
-//     language_id: 54,
-//     stdin: '2 3',
-//     expected_output: '5',
-//     stdout: '5',
-//     status_id: 3,
-//     created_at: '2025-05-12T16:47:37.239Z',
-//     finished_at: '2025-05-12T16:47:37.695Z',
-//     time: '0.002',
-//     memory: 904,
-//     stderr: null,
-//     token: '611405fa-4f31-44a6-99c8-6f407bc14e73',
-
-
-// User.findByIdUpdate({
-// })
-
-//const user =  User.findById(id)
-// user.firstName = "Mohit";
-// await user.save();

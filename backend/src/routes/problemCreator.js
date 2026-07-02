@@ -6,7 +6,6 @@ const {createProblem,updateProblem,deleteProblem,getProblemById,getAllProblem,so
 const userMiddleware = require("../middleware/userMiddleware");
 
 
-// Create
 problemRouter.post("/create",adminMiddleware ,createProblem);
 problemRouter.put("/update/:id",adminMiddleware, updateProblem);
 problemRouter.delete("/delete/:id",adminMiddleware, deleteProblem);
@@ -20,6 +19,3 @@ problemRouter.get("/submittedProblem/:pid",userMiddleware,submittedProblem);
 
 module.exports = problemRouter;
 
-// fetch
-// update
-// delete 
