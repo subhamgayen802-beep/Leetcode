@@ -1,5 +1,9 @@
 const express = require('express')
 const app = express();
+<<<<<<< HEAD
+=======
+require('dotenv').config();
+>>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
 const main =  require('./config/db')
 const cookieParser =  require('cookie-parser');
 const authRouter = require("./routes/userAuth");
@@ -7,6 +11,7 @@ const redisClient = require('./config/redis');
 const problemRouter = require("./routes/problemCreator");
 const submitRouter = require("./routes/submit")
 const aiRouter = require("./routes/aiChatting")
+<<<<<<< HEAD
 const rateLimiter = require("./middleware/rateLimiter")
 const videoRouter = require("./routes/videoCreator");
 const cors = require('cors');
@@ -24,6 +29,40 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(authRouter);
+=======
+const videoRouter = require("./routes/videoCreator");
+const cors = require('cors')
+const rateLimiter = require("./middleware/rateLimiter")
+require("node:dns/promises").setServers(["8.8.8.8", "1.1.1.1"]);
+
+
+
+const ALLOWED_ORIGINS = [
+  "https://leetcode-omega-five.vercel.app",
+  "http://localhost:5173",
+];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (
+      !origin ||
+      ALLOWED_ORIGINS.includes(origin) ||
+      origin.endsWith(".vercel.app") 
+    ) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+}));
+
+app.use(express.json());
+app.use(cookieParser());
+
+app.use(rateLimiter);
+app.use('/user',authRouter);
+>>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
 app.use('/problem',problemRouter);
 app.use('/submission',submitRouter);
 app.use('/ai',aiRouter);

@@ -21,7 +21,11 @@ function Login() {
     register,
     handleSubmit,
     formState: { errors },
+<<<<<<< HEAD
   } = useForm({ resolver: zodResolver(loginSchema) }); // Using renamed schema
+=======
+  } = useForm({ resolver: zodResolver(loginSchema) });
+>>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -41,8 +45,13 @@ function Login() {
 
           
           <form onSubmit={handleSubmit(onSubmit)}>
+<<<<<<< HEAD
             <div className="form-control"> {/* Removed mt-4 from first form-control for tighter spacing to title or global error */}
               <label className="label"> {/* Removed mb-1, default spacing should be fine */}
+=======
+            <div className="form-control"> 
+              <label className="label">
+>>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
                 <span className="label-text">Email</span>
               </label>
               <input
@@ -93,7 +102,11 @@ function Login() {
             <div className="form-control mt-8 flex justify-center">
               <button
                 type="submit"
+<<<<<<< HEAD
                 className={`btn btn-primary ${loading ? 'loading btn-disabled' : ''}`} // Added btn-disabled for better UX with loading
+=======
+                className={`btn btn-primary ${loading ? 'loading btn-disabled' : ''}`} 
+>>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
                 disabled={loading}
               >
                 {loading ? (

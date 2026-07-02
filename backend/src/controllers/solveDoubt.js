@@ -1,5 +1,6 @@
 const { GoogleGenAI } = require("@google/genai");
 
+<<<<<<< HEAD
 
 const solveDoubt = async(req , res)=>{
 
@@ -14,6 +15,38 @@ const solveDoubt = async(req , res)=>{
         model: "gemini-1.5-flash",
         contents: messages,
         config: {
+=======
+const generateWithRetry = async (ai, payload, maxRetries = 3, delayMs = 2000) => {
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      const response = await ai.models.generateContent(payload);
+      return response;
+    } catch (err) {
+      const is503 = err.status === 503;
+      const isLastAttempt = attempt === maxRetries;
+
+      if (is503 && !isLastAttempt) {
+        console.log(`Gemini 503 on attempt ${attempt}/${maxRetries}, retrying in ${delayMs}ms...`);
+        await new Promise(resolve => setTimeout(resolve, delayMs));
+        delayMs *= 2; 
+      } else {
+        throw err; 
+      }
+    }
+  }
+};
+
+const solveDoubt = async (req, res) => {
+  try {
+    const { messages, title, description, testCases, startCode } = req.body;
+
+    const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_KEY });
+
+    const response = await generateWithRetry(ai, {
+      model: "gemini-3.5-flash",
+      contents: messages,
+      config: {
+>>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
         systemInstruction: `
 You are an expert Data Structures and Algorithms (DSA) tutor specializing in helping users solve coding problems. Your role is strictly limited to DSA-related assistance only.
 
@@ -81,6 +114,7 @@ You are an expert Data Structures and Algorithms (DSA) tutor specializing in hel
 - Promote best coding practices
 
 Remember: Your goal is to help users learn and understand DSA concepts through the lens of the current problem, not just to provide quick answers.
+<<<<<<< HEAD
 `},
     });
      
@@ -101,3 +135,35 @@ Remember: Your goal is to help users learn and understand DSA concepts through t
 }
 
 module.exports = solveDoubt;
+=======
+`,
+      },
+    });
+
+    return res.status(200).json({
+      message: response.text,
+    });
+
+  } catch (err) {
+    console.error("Gemini API error:", err);
+
+    if (err.status === 503) {
+      return res.status(503).json({
+        message: "The AI is currently busy due to high demand. Please try again in a moment.",
+      });
+    }
+
+    if (err.status === 401 || err.status === 403) {
+      return res.status(403).json({
+        message: "AI service authentication failed. Please check your API key.",
+      });
+    }
+
+    return res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+};
+
+module.exports = solveDoubt;
+>>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8

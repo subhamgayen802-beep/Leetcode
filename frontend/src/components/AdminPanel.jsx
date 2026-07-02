@@ -4,7 +4,11 @@ import { z } from 'zod';
 import axiosClient from '../utils/axiosClient';
 import { useNavigate } from 'react-router';
 
+<<<<<<< HEAD
 // Zod schema matching the problem schema
+=======
+
+>>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
 const problemSchema = z.object({
   title: z.string().min(1, 'Title is required'),
   description: z.string().min(1, 'Description is required'),
@@ -25,13 +29,21 @@ const problemSchema = z.object({
   ).min(1, 'At least one hidden test case required'),
   startCode: z.array(
     z.object({
+<<<<<<< HEAD
       language: z.enum(['C++', 'Java', 'JavaScript']),
+=======
+      language: z.enum(['python', 'javaScript']),
+>>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
       initialCode: z.string().min(1, 'Initial code is required')
     })
   ).length(3, 'All three languages required'),
   referenceSolution: z.array(
     z.object({
+<<<<<<< HEAD
       language: z.enum(['C++', 'Java', 'JavaScript']),
+=======
+      language: z.enum(['python', 'javaScript']),
+>>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
       completeCode: z.string().min(1, 'Complete code is required')
     })
   ).length(3, 'All three languages required')
@@ -48,6 +60,7 @@ function AdminPanel() {
     resolver: zodResolver(problemSchema),
     defaultValues: {
       startCode: [
+<<<<<<< HEAD
         { language: 'C++', initialCode: '' },
         { language: 'Java', initialCode: '' },
         { language: 'JavaScript', initialCode: '' }
@@ -55,6 +68,13 @@ function AdminPanel() {
       referenceSolution: [
         { language: 'C++', completeCode: '' },
         { language: 'Java', completeCode: '' },
+=======
+        { language: 'python', initialCode: '' },
+        { language: 'javaScript', initialCode: '' }
+      ],
+      referenceSolution: [
+         { language: 'python', initialCode: '' },
+>>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
         { language: 'JavaScript', completeCode: '' }
       ]
     }
@@ -252,10 +272,17 @@ function AdminPanel() {
           <h2 className="text-xl font-semibold mb-4">Code Templates</h2>
           
           <div className="space-y-6">
+<<<<<<< HEAD
             {[0, 1, 2].map((index) => (
               <div key={index} className="space-y-2">
                 <h3 className="font-medium">
                   {index === 0 ? 'C++' : index === 1 ? 'Java' : 'JavaScript'}
+=======
+            {[0, 1, ].map((index) => (
+              <div key={index} className="space-y-2">
+                <h3 className="font-medium">
+                  {index === 0 ? 'python' : 'JavaScript'}
+>>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
                 </h3>
                 
                 <div className="form-control">

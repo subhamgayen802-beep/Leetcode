@@ -10,14 +10,23 @@ import ProblemPage from "./pages/ProblemPage"
 import Admin from "./pages/Admin";
 import AdminVideo from "./components/AdminVideo"
 import AdminDelete from "./components/AdminDelete"
+<<<<<<< HEAD
 import AdminUpload from "./components/AdminUpload"
+=======
+
+import { ProblemList, UpdateProblemForm } from './components/AdminUpdate';
+>>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
 
 function App(){
   
   const dispatch = useDispatch();
   const {isAuthenticated,user,loading} = useSelector((state)=>state.auth);
 
+<<<<<<< HEAD
   // check initial authentication
+=======
+
+>>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
   useEffect(() => {
     dispatch(checkAuth());
   }, [dispatch]);
@@ -34,12 +43,25 @@ function App(){
       <Route path="/" element={isAuthenticated ?<Homepage></Homepage>:<Navigate to="/signup" />}></Route>
       <Route path="/login" element={isAuthenticated?<Navigate to="/" />:<Login></Login>}></Route>
       <Route path="/signup" element={isAuthenticated?<Navigate to="/" />:<Signup></Signup>}></Route>
+<<<<<<< HEAD
+=======
+      <Route path="/problem/:problemId" element={<ProblemPage/>}></Route>
+
+
+>>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
       <Route path="/admin" element={isAuthenticated && user?.role === 'admin' ? <Admin /> : <Navigate to="/" />} />
       <Route path="/admin/create" element={isAuthenticated && user?.role === 'admin' ? <AdminPanel /> : <Navigate to="/" />} />
       <Route path="/admin/delete" element={isAuthenticated && user?.role === 'admin' ? <AdminDelete /> : <Navigate to="/" />} />
       <Route path="/admin/video" element={isAuthenticated && user?.role === 'admin' ? <AdminVideo /> : <Navigate to="/" />} />
+<<<<<<< HEAD
       <Route path="/admin/upload/:problemId" element={isAuthenticated && user?.role === 'admin' ? <AdminUpload /> : <Navigate to="/" />} />
       <Route path="/problem/:problemId" element={<ProblemPage/>}></Route>
+=======
+
+
+      <Route path="/admin/update" element={<ProblemList />} />
+       <Route path="/admin/update/:id" element={<UpdateProblemForm />} />
+>>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
       
     </Routes>
   </>
