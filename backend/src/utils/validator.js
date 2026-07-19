@@ -14,18 +14,12 @@ const validate = (data)=>{
     if(!validator.isEmail(data.emailId))
         throw new Error("Invalid Email");
 
-<<<<<<< HEAD
     if(!validator.isStrongPassword(data.password))
         throw new Error("Week Password");
-=======
-<<<<<<< HEAD
-    if(!validator.isStrongPassword(data.password))
-        throw new Error("Week Password");
-=======
+
     // if(!validator.isStrongPassword(data.password))
     //     throw new Error("Week Password");
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
->>>>>>> 2a37b0ac49fc524d305b52d6207bd53f0a725afb
+
 }
 
 module.exports = validate;

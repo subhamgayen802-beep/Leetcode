@@ -16,28 +16,23 @@ const generateUploadSignature = async (req, res) => {
     const { problemId } = req.params;
     
     const userId = req.result._id;
-<<<<<<< HEAD
 
-=======
     // Verify problem exists
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
+
     const problem = await Problem.findById(problemId);
     if (!problem) {
       return res.status(404).json({ error: 'Problem not found' });
     }
 
-<<<<<<< HEAD
    
     const timestamp = Math.round(new Date().getTime() / 1000);
     const publicId = `leetcode-solutions/${problemId}/${userId}_${timestamp}`;
     
-=======
     // Generate unique public_id for the video
     const timestamp = Math.round(new Date().getTime() / 1000);
     const publicId = `leetcode-solutions/${problemId}/${userId}_${timestamp}`;
     
     // Upload parameters
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
     const uploadParams = {
       timestamp: timestamp,
       public_id: publicId,
@@ -76,10 +71,7 @@ const saveVideoMetadata = async (req, res) => {
 
     const userId = req.result._id;
 
-<<<<<<< HEAD
-=======
-    // Verify the upload with Cloudinary
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
+
     const cloudinaryResource = await cloudinary.api.resource(
       cloudinaryPublicId,
       { resource_type: 'video' }
@@ -89,11 +81,6 @@ const saveVideoMetadata = async (req, res) => {
       return res.status(400).json({ error: 'Video not found on Cloudinary' });
     }
 
-<<<<<<< HEAD
-    
-=======
-    // Check if video already exists for this problem and user
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
     const existingVideo = await SolutionVideo.findOne({
       problemId,
       userId,
@@ -104,15 +91,8 @@ const saveVideoMetadata = async (req, res) => {
       return res.status(409).json({ error: 'Video already exists' });
     }
 
-<<<<<<< HEAD
-
-    const thumbnailUrl = cloudinary.image(cloudinaryResource.public_id,{resource_type: "video"})
-
-
-=======
    
     const thumbnailUrl = cloudinary.image(cloudinaryResource.public_id,{resource_type: "video"})
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
     const videoSolution = await SolutionVideo.create({
       problemId,
       userId,

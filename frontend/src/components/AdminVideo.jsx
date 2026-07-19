@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
-<<<<<<< HEAD
-import axiosClient from '../utils/axiosClient'
-=======
+
 import axiosClient from '../utils/axiosClient';
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
 import { NavLink } from 'react-router';
 
 const AdminVideo = () => {
@@ -11,10 +8,7 @@ const AdminVideo = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
   useEffect(() => {
     fetchProblems();
   }, []);
@@ -23,9 +17,8 @@ const AdminVideo = () => {
     try {
       setLoading(true);
       const { data } = await axiosClient.get('/problem/getAllProblem');
-<<<<<<< HEAD
       setProblems(data);
-=======
+
       // FIX 1: API may return an object instead of array (same issue as SubmissionHistory)
       if (Array.isArray(data)) {
         setProblems(data);
@@ -36,7 +29,7 @@ const AdminVideo = () => {
       } else {
         setProblems([]);
       }
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
+
     } catch (err) {
       setError('Failed to fetch problems');
       console.error(err);
@@ -46,32 +39,20 @@ const AdminVideo = () => {
   };
 
   const handleDelete = async (id) => {
-<<<<<<< HEAD
-    if (!window.confirm('Are you sure you want to delete this problem?')) return;
-    
-=======
+
     if (!window.confirm('Are you sure you want to delete this video?')) return;
 
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
     try {
       await axiosClient.delete(`/video/delete/${id}`);
       setProblems(problems.filter(problem => problem._id !== id));
     } catch (err) {
-<<<<<<< HEAD
-      setError(err);
-      console.log(err);
-    }
-  };
 
-
-=======
       const message = err?.response?.data?.error || err?.message || 'Failed to delete video';
       setError(message);
       console.error(err);
     }
   };
 
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
@@ -87,12 +68,8 @@ const AdminVideo = () => {
           <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-<<<<<<< HEAD
           <span>{error.response.data.error}</span>
-=======
-        
           <span>{error}</span>
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
         </div>
       </div>
     );
@@ -104,7 +81,7 @@ const AdminVideo = () => {
         <h1 className="text-3xl font-bold">Video Upload and Delete</h1>
       </div>
 
-<<<<<<< HEAD
+
       <div className="overflow-x-auto">
         <table className="table table-zebra w-full">
           <thead>
@@ -222,7 +199,6 @@ const AdminVideo = () => {
           </table>
         </div>
       )}
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
     </div>
   );
 };

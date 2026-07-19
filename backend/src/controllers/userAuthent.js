@@ -7,69 +7,50 @@ const Submission = require("../models/submission")
 
 
 const register = async (req,res)=>{
-<<<<<<< HEAD
-    
-    try{
-  
-
-=======
+ 
        
 
     try{
    
       
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
       validate(req.body); 
       const {firstName, emailId, password}  = req.body;
 
       req.body.password = await bcrypt.hash(password, 10);
       req.body.role = 'user'
-<<<<<<< HEAD
-    //
+
     
      const user =  await User.create(req.body);
      const token =  jwt.sign({_id:user._id , emailId:emailId, role:'user'},process.env.JWT_KEY,{expiresIn: 60*60});
      const reply = {
-=======
- 
-      const user = await User.create(req.body);
-
-      const token =  jwt.sign({_id:user._id , emailId:emailId, role:'user'},process.env.JWT_KEY,{expiresIn: 60*60});
-      const reply = {
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
         firstName: user.firstName,
         emailId: user.emailId,
         _id: user._id,
         role:user.role,
     }
     
-<<<<<<< HEAD
+
      res.cookie('token',token,{maxAge: 60*60*1000});
-=======
-     
+
     res.cookie('token', token, {
       maxAge: 60 * 60 * 1000,
       httpOnly: true,   
       sameSite: 'none', 
       secure: true,   // localhost false,production true
     });
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
      res.status(201).json({
         user:reply,
         message:"Loggin Successfully"
     })
     }
     catch(err){
-<<<<<<< HEAD
+
         res.status(400).send("Error: "+err);
-=======
-        res.status(400).json({ message: err.message });
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
     }
 }
 
 
-<<<<<<< HEAD
+
 const login = async (req,res)=>{
 
     try{
@@ -106,7 +87,6 @@ const login = async (req,res)=>{
     }
 }
 
-=======
 const login = async (req, res) => {
   try {
     
@@ -148,7 +128,7 @@ const login = async (req, res) => {
     res.status(401).json({ message: err.message }); 
   }
 };
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
+
 
 
 
@@ -161,12 +141,8 @@ const logout = async(req,res)=>{
 
         await redisClient.set(`token:${token}`,'Blocked');
         await redisClient.expireAt(`token:${token}`,payload.exp);
-<<<<<<< HEAD
-   
 
-=======
-    
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
+
     res.cookie("token",null,{expires: new Date(Date.now())});
     res.send("Logged Out Succesfully");
 
@@ -179,20 +155,14 @@ const logout = async(req,res)=>{
 
 const adminRegister = async(req,res)=>{
     try{
-<<<<<<< HEAD
-       
-=======
+
    
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
+
       validate(req.body); 
       const {firstName, emailId, password}  = req.body;
 
       req.body.password = await bcrypt.hash(password, 10);
-<<<<<<< HEAD
-    //
-=======
 
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
     
      const user =  await User.create(req.body);
      const token =  jwt.sign({_id:user._id , emailId:emailId, role:user.role},process.env.JWT_KEY,{expiresIn: 60*60});
@@ -208,19 +178,9 @@ const deleteProfile = async(req,res)=>{
   
     try{
        const userId = req.result._id;
-      
-<<<<<<< HEAD
-    // userSchema delete
+   
     await User.findByIdAndDelete(userId);
 
-    // Submission se bhi delete ...
-    
- 
-=======
-  
-    await User.findByIdAndDelete(userId);
-
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
     
     res.status(200).send("Deleted Successfully");
 

@@ -2,26 +2,11 @@ import { useState, useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import Editor from '@monaco-editor/react';
 import { useParams } from 'react-router';
-<<<<<<< HEAD
-import axiosClient from "../utils/axiosClient"
-import SubmissionHistory from "../components/SubmissionHistory"
-import ChatAi from '../components/ChatAi';
-import Editorial from '../components/Editorial';
-
-const langMap = {
-        cpp: 'C++',
-        java: 'Java',
-        javascript: 'JavaScript'
-};
-
-
-=======
 import axiosClient from "../utils/axiosClient";
 import SubmissionHistory from "../components/SubmissionHistory";
 import ChatAi from '../components/ChatAi';
 import Editorial from '../components/Editorial';
 
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
 const ProblemPage = () => {
   const [problem, setProblem] = useState(null);
   const [selectedLanguage, setSelectedLanguage] = useState('javascript');
@@ -32,29 +17,6 @@ const ProblemPage = () => {
   const [activeLeftTab, setActiveLeftTab] = useState('description');
   const [activeRightTab, setActiveRightTab] = useState('code');
   const editorRef = useRef(null);
-<<<<<<< HEAD
-  let {problemId}  = useParams();
-
-  
-
-  const { handleSubmit } = useForm();
-
- useEffect(() => {
-    const fetchProblem = async () => {
-      setLoading(true);
-      try {
-        
-        const response = await axiosClient.get(`/problem/problemById/${problemId}`);
-       
-        
-        const initialCode = response.data.startCode.find(sc => sc.language === langMap[selectedLanguage]).initialCode;
-
-        setProblem(response.data);
-        
-        setCode(initialCode);
-        setLoading(false);
-        
-=======
   let { problemId } = useParams();
 
   const { handleSubmit } = useForm();
@@ -86,7 +48,6 @@ const ProblemPage = () => {
         setCode(startCodeEntry?.initialCode ?? '');
         setLoading(false);
 
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
       } catch (error) {
         console.error('Error fetching problem:', error);
         setLoading(false);
@@ -96,18 +57,10 @@ const ProblemPage = () => {
     fetchProblem();
   }, [problemId]);
 
-<<<<<<< HEAD
-  // Update code when language changes
-  useEffect(() => {
-    if (problem) {
-      const initialCode = problem.startCode.find(sc => sc.language === langMap[selectedLanguage]).initialCode;
-      setCode(initialCode);
-=======
   useEffect(() => {
     if (problem && problem.startCode) {
       const entry = problem.startCode.find(sc => sc.language === selectedLanguage);
       setCode(entry?.initialCode ?? '');
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
     }
   }, [selectedLanguage, problem]);
 
@@ -126,11 +79,7 @@ const ProblemPage = () => {
   const handleRun = async () => {
     setLoading(true);
     setRunResult(null);
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
     try {
       const response = await axiosClient.post(`/submission/run/${problemId}`, {
         code,
@@ -140,11 +89,7 @@ const ProblemPage = () => {
       setRunResult(response.data);
       setLoading(false);
       setActiveRightTab('testcase');
-<<<<<<< HEAD
-      
-=======
 
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
     } catch (error) {
       console.error('Error running code:', error);
       setRunResult({
@@ -159,19 +104,6 @@ const ProblemPage = () => {
   const handleSubmitCode = async () => {
     setLoading(true);
     setSubmitResult(null);
-<<<<<<< HEAD
-    
-    try {
-        const response = await axiosClient.post(`/submission/submit/${problemId}`, {
-        code:code,
-        language: selectedLanguage
-      });
-
-       setSubmitResult(response.data);
-       setLoading(false);
-       setActiveRightTab('result');
-      
-=======
 
     try {
       const response = await axiosClient.post(`/submission/submit/${problemId}`, {
@@ -183,7 +115,6 @@ const ProblemPage = () => {
       setLoading(false);
       setActiveRightTab('result');
 
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
     } catch (error) {
       console.error('Error submitting code:', error);
       setSubmitResult(null);
@@ -195,31 +126,11 @@ const ProblemPage = () => {
   const getLanguageForMonaco = (lang) => {
     switch (lang) {
       case 'javascript': return 'javascript';
-<<<<<<< HEAD
-      case 'java': return 'java';
-      case 'cpp': return 'cpp';
-=======
       case 'python': return 'python';
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
       default: return 'javascript';
     }
   };
 
-<<<<<<< HEAD
-  const getDifficultyColor = (difficulty) => {
-    switch (difficulty) {
-      case 'easy': return 'text-green-500';
-      case 'medium': return 'text-yellow-500';
-      case 'hard': return 'text-red-500';
-      default: return 'text-gray-500';
-    }
-  };
-
-  if (loading && !problem) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <span className="loading loading-spinner loading-lg"></span>
-=======
   const getDifficultyBadge = (difficulty) => {
     switch (difficulty.toLowerCase()) {
       case 'easy': 
@@ -257,140 +168,11 @@ const ProblemPage = () => {
           </svg>
           <span className="text-sm font-medium">Problem not found. Please check the URL or try again.</span>
         </div>
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
       </div>
     );
   }
 
   return (
-<<<<<<< HEAD
-    <div className="h-screen flex bg-base-100">
-      {/* Left Panel */}
-      <div className="w-1/2 flex flex-col border-r border-base-300">
-        {/* Left Tabs */}
-        <div className="tabs tabs-bordered bg-base-200 px-4">
-          <button 
-            className={`tab ${activeLeftTab === 'description' ? 'tab-active' : ''}`}
-            onClick={() => setActiveLeftTab('description')}
-          >
-            Description
-          </button>
-          <button 
-            className={`tab ${activeLeftTab === 'editorial' ? 'tab-active' : ''}`}
-            onClick={() => setActiveLeftTab('editorial')}
-          >
-            Editorial
-          </button>
-          <button 
-            className={`tab ${activeLeftTab === 'solutions' ? 'tab-active' : ''}`}
-            onClick={() => setActiveLeftTab('solutions')}
-          >
-            Solutions
-          </button>
-          <button 
-            className={`tab ${activeLeftTab === 'submissions' ? 'tab-active' : ''}`}
-            onClick={() => setActiveLeftTab('submissions')}
-          >
-            Submissions
-          </button>
-
-          <button 
-            className={`tab ${activeLeftTab === 'chatAI' ? 'tab-active' : ''}`}
-            onClick={() => setActiveLeftTab('chatAI')}
-          >
-            ChatAI
-          </button>
-
-
-        </div>
-
-        {/* Left Content */}
-        <div className="flex-1 overflow-y-auto p-6">
-          {problem && (
-            <>
-              {activeLeftTab === 'description' && (
-                <div>
-                  <div className="flex items-center gap-4 mb-6">
-                    <h1 className="text-2xl font-bold">{problem.title}</h1>
-                    <div className={`badge badge-outline ${getDifficultyColor(problem.difficulty)}`}>
-                      {problem.difficulty.charAt(0).toUpperCase() + problem.difficulty.slice(1)}
-                    </div>
-                    <div className="badge badge-primary">{problem.tags}</div>
-                  </div>
-
-                  <div className="prose max-w-none">
-                    <div className="whitespace-pre-wrap text-sm leading-relaxed">
-                      {problem.description}
-                    </div>
-                  </div>
-
-                  <div className="mt-8">
-                    <h3 className="text-lg font-semibold mb-4">Examples:</h3>
-                    <div className="space-y-4">
-                      {problem.visibleTestCases.map((example, index) => (
-                        <div key={index} className="bg-base-200 p-4 rounded-lg">
-                          <h4 className="font-semibold mb-2">Example {index + 1}:</h4>
-                          <div className="space-y-2 text-sm font-mono">
-                            <div><strong>Input:</strong> {example.input}</div>
-                            <div><strong>Output:</strong> {example.output}</div>
-                            <div><strong>Explanation:</strong> {example.explanation}</div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {activeLeftTab === 'editorial' && (
-                <div className="prose max-w-none">
-                  <h2 className="text-xl font-bold mb-4">Editorial</h2>
-                  <div className="whitespace-pre-wrap text-sm leading-relaxed">
-                    <Editorial secureUrl={problem.secureUrl} thumbnailUrl={problem.thumbnailUrl} duration={problem.duration}/>
-                  </div>
-                </div>
-              )}
-
-              {activeLeftTab === 'solutions' && (
-                <div>
-                  <h2 className="text-xl font-bold mb-4">Solutions</h2>
-                  <div className="space-y-6">
-                    {problem.referenceSolution?.map((solution, index) => (
-                      <div key={index} className="border border-base-300 rounded-lg">
-                        <div className="bg-base-200 px-4 py-2 rounded-t-lg">
-                          <h3 className="font-semibold">{problem?.title} - {solution?.language}</h3>
-                        </div>
-                        <div className="p-4">
-                          <pre className="bg-base-300 p-4 rounded text-sm overflow-x-auto">
-                            <code>{solution?.completeCode}</code>
-                          </pre>
-                        </div>
-                      </div>
-                    )) || <p className="text-gray-500">Solutions will be available after you solve the problem.</p>}
-                  </div>
-                </div>
-              )}
-
-              {activeLeftTab === 'submissions' && (
-                <div>
-                  <h2 className="text-xl font-bold mb-4">My Submissions</h2>
-                  <div className="text-gray-500">
-                    <SubmissionHistory problemId={problemId} />
-                  </div>
-                </div>
-              )}
-
-              {activeLeftTab === 'chatAI' && (
-                <div className="prose max-w-none">
-                  <h2 className="text-xl font-bold mb-4">CHAT with AI</h2>
-                  <div className="whitespace-pre-wrap text-sm leading-relaxed">
-                    <ChatAi problem={problem}></ChatAi>
-                  </div>
-                </div>
-              )}
-            </>
-          )}
-=======
     <div className="h-screen flex bg-[#09090B] text-zinc-200 overflow-hidden font-sans">
       {/* Left Panel */}
       <div className="w-1/2 flex flex-col border-r border-[#27272A] bg-[#09090B]">
@@ -580,57 +362,10 @@ const ProblemPage = () => {
             </div>
           )}
 
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
         </div>
       </div>
 
       {/* Right Panel */}
-<<<<<<< HEAD
-      <div className="w-1/2 flex flex-col">
-        {/* Right Tabs */}
-        <div className="tabs tabs-bordered bg-base-200 px-4">
-          <button 
-            className={`tab ${activeRightTab === 'code' ? 'tab-active' : ''}`}
-            onClick={() => setActiveRightTab('code')}
-          >
-            Code
-          </button>
-          <button 
-            className={`tab ${activeRightTab === 'testcase' ? 'tab-active' : ''}`}
-            onClick={() => setActiveRightTab('testcase')}
-          >
-            Testcase
-          </button>
-          <button 
-            className={`tab ${activeRightTab === 'result' ? 'tab-active' : ''}`}
-            onClick={() => setActiveRightTab('result')}
-          >
-            Result
-          </button>
-        </div>
-
-        {/* Right Content */}
-        <div className="flex-1 flex flex-col">
-          {activeRightTab === 'code' && (
-            <div className="flex-1 flex flex-col">
-              {/* Language Selector */}
-              <div className="flex justify-between items-center p-4 border-b border-base-300">
-                <div className="flex gap-2">
-                  {['javascript', 'java', 'cpp'].map((lang) => (
-                    <button
-                      key={lang}
-                      className={`btn btn-sm ${selectedLanguage === lang ? 'btn-primary' : 'btn-ghost'}`}
-                      onClick={() => handleLanguageChange(lang)}
-                    >
-                      {lang === 'cpp' ? 'C++' : lang === 'javascript' ? 'JavaScript' : 'Java'}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Monaco Editor */}
-              <div className="flex-1">
-=======
       <div className="w-1/2 flex flex-col bg-[#09090B]">
         
         {/* Right Tabs */}
@@ -708,7 +443,6 @@ const ProblemPage = () => {
 
               {/* Monaco Editor Container */}
               <div className="flex-1 relative bg-[#1E1E1E]">
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
                 <Editor
                   height="100%"
                   language={getLanguageForMonaco(selectedLanguage)}
@@ -739,32 +473,6 @@ const ProblemPage = () => {
                 />
               </div>
 
-<<<<<<< HEAD
-              {/* Action Buttons */}
-              <div className="p-4 border-t border-base-300 flex justify-between">
-                <div className="flex gap-2">
-                  <button 
-                    className="btn btn-ghost btn-sm"
-                    onClick={() => setActiveRightTab('testcase')}
-                  >
-                    Console
-                  </button>
-                </div>
-                <div className="flex gap-2">
-                  <button
-                    className={`btn btn-outline btn-sm ${loading ? 'loading' : ''}`}
-                    onClick={handleRun}
-                    disabled={loading}
-                  >
-                    Run
-                  </button>
-                  <button
-                    className={`btn btn-primary btn-sm ${loading ? 'loading' : ''}`}
-                    onClick={handleSubmitCode}
-                    disabled={loading}
-                  >
-                    Submit
-=======
               {/* Action Buttons Footer */}
               <div className="p-4 border-t border-[#27272A] bg-[#18181B] flex justify-between items-center shadow-sm">
                 <button
@@ -787,7 +495,6 @@ const ProblemPage = () => {
                     disabled={loading}
                   >
                     Submit Code
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
                   </button>
                 </div>
               </div>
@@ -795,58 +502,6 @@ const ProblemPage = () => {
           )}
 
           {activeRightTab === 'testcase' && (
-<<<<<<< HEAD
-            <div className="flex-1 p-4 overflow-y-auto">
-              <h3 className="font-semibold mb-4">Test Results</h3>
-              {runResult ? (
-                <div className={`alert ${runResult.success ? 'alert-success' : 'alert-error'} mb-4`}>
-                  <div>
-                    {runResult.success ? (
-                      <div>
-                        <h4 className="font-bold">✅ All test cases passed!</h4>
-                        <p className="text-sm mt-2">Runtime: {runResult.runtime+" sec"}</p>
-                        <p className="text-sm">Memory: {runResult.memory+" KB"}</p>
-                        
-                        <div className="mt-4 space-y-2">
-                          {runResult.testCases.map((tc, i) => (
-                            <div key={i} className="bg-base-100 p-3 rounded text-xs">
-                              <div className="font-mono">
-                                <div><strong>Input:</strong> {tc.stdin}</div>
-                                <div><strong>Expected:</strong> {tc.expected_output}</div>
-                                <div><strong>Output:</strong> {tc.stdout}</div>
-                                <div className={'text-green-600'}>
-                                  {'✓ Passed'}
-                                </div>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    ) : (
-                      <div>
-                        <h4 className="font-bold">❌ Error</h4>
-                        <div className="mt-4 space-y-2">
-                          {runResult.testCases.map((tc, i) => (
-                            <div key={i} className="bg-base-100 p-3 rounded text-xs">
-                              <div className="font-mono">
-                                <div><strong>Input:</strong> {tc.stdin}</div>
-                                <div><strong>Expected:</strong> {tc.expected_output}</div>
-                                <div><strong>Output:</strong> {tc.stdout}</div>
-                                <div className={tc.status_id==3 ? 'text-green-600' : 'text-red-600'}>
-                                  {tc.status_id==3 ? '✓ Passed' : '✗ Failed'}
-                                </div>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ) : (
-                <div className="text-gray-500">
-                  Click "Run" to test your code with the example test cases.
-=======
             <div className="flex-1 p-6 overflow-y-auto bg-[#09090B] scrollbar-thin">
               <h3 className="font-bold text-white tracking-wide text-sm mb-4 flex items-center gap-2">
                 <span className="w-1.5 h-3 bg-zinc-450 rounded-sm"></span>
@@ -903,35 +558,12 @@ const ProblemPage = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                   <p className="text-xs text-zinc-500">Run code to initialize local testing workspace.</p>
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
                 </div>
               )}
             </div>
           )}
 
           {activeRightTab === 'result' && (
-<<<<<<< HEAD
-            <div className="flex-1 p-4 overflow-y-auto">
-              <h3 className="font-semibold mb-4">Submission Result</h3>
-              {submitResult ? (
-                <div className={`alert ${submitResult.accepted ? 'alert-success' : 'alert-error'}`}>
-                  <div>
-                    {submitResult.accepted ? (
-                      <div>
-                        <h4 className="font-bold text-lg">🎉 Accepted</h4>
-                        <div className="mt-4 space-y-2">
-                          <p>Test Cases Passed: {submitResult.passedTestCases}/{submitResult.totalTestCases}</p>
-                          <p>Runtime: {submitResult.runtime + " sec"}</p>
-                          <p>Memory: {submitResult.memory + "KB"} </p>
-                        </div>
-                      </div>
-                    ) : (
-                      <div>
-                        <h4 className="font-bold text-lg">❌ {submitResult.error}</h4>
-                        <div className="mt-4 space-y-2">
-                          <p>Test Cases Passed: {submitResult.passedTestCases}/{submitResult.totalTestCases}</p>
-                        </div>
-=======
             <div className="flex-1 p-6 overflow-y-auto bg-[#09090B]">
               <h3 className="font-bold text-white tracking-wide text-sm mb-4 flex items-center gap-2">
                 <span className="w-1.5 h-3 bg-zinc-450 rounded-sm"></span>
@@ -965,22 +597,16 @@ const ProblemPage = () => {
                     {submitResult.accepted && (
                       <div className="pt-2 text-xs text-zinc-400 leading-relaxed">
                         Your solution beat <span className="text-white font-bold">84.2%</span> of other submissions. Awesome work!
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
                       </div>
                     )}
                   </div>
                 </div>
               ) : (
-<<<<<<< HEAD
-                <div className="text-gray-500">
-                  Click "Submit" to submit your solution for evaluation.
-=======
                 <div className="flex flex-col items-center justify-center h-48 border border-dashed border-[#27272A] rounded-lg text-center p-6 bg-[#18181B]/20">
                   <svg className="w-8 h-8 text-zinc-700 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138z" />
                   </svg>
                   <p className="text-xs text-zinc-550">Submit solution to initiate global evaluator.</p>
->>>>>>> 93f86a1a0bdd4036f98d5c59687dc3dfa96fb8b8
                 </div>
               )}
             </div>
