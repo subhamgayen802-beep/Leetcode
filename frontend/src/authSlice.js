@@ -97,14 +97,6 @@ const authSlice = createSlice({
         state.isAuthenticated = false;
         state.user = null;
       })
-  
-        .addCase(registerUser.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload || 'Something went wrong'; 
-        state.isAuthenticated = false;
-       state.user = null;
-      })
-
       .addCase(loginUser.pending, (state) => {
         state.loading = true;
         state.error = null;

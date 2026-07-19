@@ -19,7 +19,7 @@ const AdminVideo = () => {
       const { data } = await axiosClient.get('/problem/getAllProblem');
       setProblems(data);
 
-      // FIX 1: API may return an object instead of array (same issue as SubmissionHistory)
+      
       if (Array.isArray(data)) {
         setProblems(data);
       } else if (data && Array.isArray(data.problems)) {

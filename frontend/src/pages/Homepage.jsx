@@ -70,7 +70,7 @@ function Homepage() {
 
   return (
     <div className="min-h-screen bg-[#09090B] text-[#E4E4E7] font-sans antialiased">
-      {/* Premium Navbar - Pitch Black Minimalist */}
+      {}
       <nav className="sticky top-0 z-40 navbar bg-[#09090B]/90 backdrop-blur-md border-b border-[#27272A] px-6">
         <div className="flex-1 flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center font-bold text-black text-lg shadow-sm">
@@ -118,10 +118,10 @@ function Homepage() {
 
       <div className="container mx-auto max-w-7xl p-6 lg:p-8">
         
-        {/* Welcome & Dashboard Quick Stats */}
+        {}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
           
-          {/* Main User Stat Card */}
+          {}
           <div className="lg:col-span-2 relative overflow-hidden bg-[#18181B] border border-[#27272A] rounded-xl p-6 shadow-sm flex flex-col justify-between">
             <div>
               <span className="text-xs font-semibold uppercase tracking-wider text-zinc-500">Overview</span>
@@ -149,12 +149,12 @@ function Homepage() {
             </div>
           </div>
 
-          {/* Difficulty Statistics Panel */}
+          {}
           <div className="bg-[#18181B] border border-[#27272A] rounded-xl p-6 shadow-sm flex flex-col justify-between">
             <h3 className="text-sm font-semibold text-zinc-300">Problem Statistics</h3>
             
             <div className="space-y-4 my-auto py-2">
-              {/* Easy Progress */}
+              {}
               <div>
                 <div className="flex justify-between text-xs font-medium mb-1">
                   <span className="text-emerald-400">Easy</span>
@@ -168,7 +168,7 @@ function Homepage() {
                 </div>
               </div>
 
-              {/* Medium Progress */}
+              {}
               <div>
                 <div className="flex justify-between text-xs font-medium mb-1">
                   <span className="text-amber-400">Medium</span>
@@ -182,7 +182,7 @@ function Homepage() {
                 </div>
               </div>
 
-              {/* Hard Progress */}
+              {}
               <div>
                 <div className="flex justify-between text-xs font-medium mb-1">
                   <span className="text-rose-450">Hard</span>
@@ -204,12 +204,12 @@ function Homepage() {
           </div>
         </div>
 
-        {/* Filters and Control Panel */}
+        {}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 bg-[#18181B]/40 border border-[#27272A] p-4 rounded-xl">
-          {/* Left Side: Filter Buttons / Pills */}
+          {}
           <div className="flex flex-wrap gap-2 items-center">
             
-            {/* Search Input */}
+            {}
             <div className="relative w-full md:w-64">
               <span className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <svg className="w-4 h-4 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
@@ -223,7 +223,7 @@ function Homepage() {
               />
             </div>
 
-            {/* Status Selector */}
+            {}
             <select
               className="select select-sm select-bordered bg-[#09090B] border-[#27272A] rounded-lg text-xs text-zinc-300 focus:border-white focus:outline-none"
               value={filters.status}
@@ -234,7 +234,7 @@ function Homepage() {
               <option value="unsolved">Unsolved</option>
             </select>
 
-            {/* Difficulty Pills */}
+            {}
             <div className="flex bg-[#09090B] p-0.5 border border-[#27272A] rounded-lg gap-0.5">
               {['all', 'easy', 'medium', 'hard'].map((diff) => (
                 <button
@@ -251,7 +251,7 @@ function Homepage() {
               ))}
             </div>
 
-            {/* Tags Select */}
+            {}
             <select
               className="select select-sm select-bordered bg-[#09090B] border-[#27272A] rounded-lg text-xs text-zinc-300 capitalize focus:border-white focus:outline-none"
               value={filters.tag}
@@ -265,13 +265,13 @@ function Homepage() {
             </select>
           </div>
 
-          {/* Right Side: Total Matching Count */}
+          {}
           <div className="text-xs text-zinc-550 font-medium whitespace-nowrap self-end md:self-center">
             Showing <span className="text-white font-bold">{filteredProblems.length}</span> problems
           </div>
         </div>
 
-        {/* Loading Spinner */}
+        {}
         {loading && (
           <div className="flex flex-col items-center justify-center py-20 gap-4">
             <span className="loading loading-spinner loading-lg text-[#E4E4E7]"></span>
@@ -279,7 +279,7 @@ function Homepage() {
           </div>
         )}
 
-        {/* Problems List Card Grid */}
+        {}
         {!loading && (
           <div className="grid gap-3">
             {filteredProblems.length > 0 ? (
@@ -291,7 +291,7 @@ function Homepage() {
                     className="group relative bg-[#18181B] hover:bg-[#202024] border border-[#27272A] hover:border-zinc-700 rounded-lg transition-all duration-200 overflow-hidden flex flex-col md:flex-row md:items-center justify-between p-5 gap-4"
                   >
                     <div className="flex items-start gap-4">
-                      {/* Solved Status Indicator Icon */}
+                      {}
                       <div className="mt-1">
                         {isSolved ? (
                           <div className="w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
@@ -303,7 +303,7 @@ function Homepage() {
                         )}
                       </div>
 
-                      {/* Problem Header Information */}
+                      {}
                       <div>
                         <div className="flex flex-wrap items-center gap-2 mb-1.5">
                           <span className="text-xs font-mono text-zinc-550">#{100 + index}</span>
@@ -331,7 +331,7 @@ function Homepage() {
                       </div>
                     </div>
 
-                    {/* Action buttons */}
+                    {}
                     <div className="flex items-center gap-2 self-end md:self-center">
                       <button 
                         onClick={() => setSelectedProblem(problem)}
@@ -366,19 +366,19 @@ function Homepage() {
         )}
       </div>
 
-      {/* Slide-out problem preview Drawer */}
+      {}
       {selectedProblem && (
         <div className="fixed inset-0 z-50 flex justify-end">
-          {/* Overlay backdrop */}
+          {}
           <div 
             className="absolute inset-0 bg-black/70 backdrop-blur-xs transition-opacity" 
             onClick={() => setSelectedProblem(null)}
           ></div>
           
-          {/* Drawer content body */}
+          {}
           <div className="relative w-full max-w-lg bg-[#09090B] border-l border-[#27272A] h-full shadow-2xl p-6 flex flex-col justify-between overflow-y-auto text-zinc-200">
             <div>
-              {/* Header */}
+              {}
               <div className="flex items-center justify-between border-b border-[#27272A] pb-4 mb-5">
                 <span className="text-xs font-mono text-zinc-555">Problem Preview</span>
                 <button 
@@ -389,7 +389,7 @@ function Homepage() {
                 </button>
               </div>
 
-              {/* Title & Metadata */}
+              {}
               <div className="mb-6">
                 <h2 className="text-2xl font-bold tracking-tight text-white mb-2">{selectedProblem.title}</h2>
                 <div className="flex gap-2">
@@ -407,14 +407,14 @@ function Homepage() {
                 </div>
               </div>
 
-              {/* Problem Description Drawer Content */}
+              {}
               <div className="space-y-4 text-sm text-zinc-300 leading-relaxed border-t border-[#27272A] pt-5">
                 <h4 className="font-semibold text-white text-base">Description</h4>
                 <p>
                   Given a set of coding conditions, your task is to design a solver that yields the optimal solution within resource constraints.
                 </p>
                 
-                {/* Visual Example card */}
+                {}
                 <div className="bg-[#18181B] rounded-xl p-4 border border-[#27272A] font-mono text-xs text-zinc-400 mt-4 space-y-2">
                   <p><span className="text-white">Input:</span> nums = [2,7,11,15], target = 9</p>
                   <p><span className="text-emerald-400">Output:</span> [0,1]</p>
@@ -423,7 +423,7 @@ function Homepage() {
               </div>
             </div>
 
-            {/* Bottom Actions */}
+            {}
             <div className="border-t border-[#27272A] pt-4 mt-8 flex gap-3">
               <button 
                 onClick={() => setSelectedProblem(null)}

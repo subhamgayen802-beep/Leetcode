@@ -19,7 +19,7 @@ function ChatAi({ problem }) {
 
   const onSubmit = async (data) => {
 
-    // Add user message to UI immediately
+    
     const userMessage = { role: 'user', parts: [{ text: data.message }] };
     const updatedMessages = [...messages, userMessage];
     setMessages(updatedMessages);
@@ -64,7 +64,7 @@ function ChatAi({ problem }) {
 
   return (
     <div className="flex flex-col h-screen max-h-[80vh] min-h-[500px]">
-      {/* Messages */}
+      {}
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.map((msg, index) => (
           <div
@@ -87,7 +87,7 @@ function ChatAi({ problem }) {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input */}
+      {}
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="sticky bottom-0 p-4 bg-base-100 border-t"

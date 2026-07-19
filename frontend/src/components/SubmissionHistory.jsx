@@ -142,7 +142,7 @@ const SubmissionHistory = ({ problemId }) => {
         </>
       )}
 
-      {/* Code View Modal */}
+      {}
       {selectedSubmission && (
         <div className="modal modal-open">
           <div className="modal-box w-11/12 max-w-5xl">

@@ -174,10 +174,10 @@ const ProblemPage = () => {
 
   return (
     <div className="h-screen flex bg-[#09090B] text-zinc-200 overflow-hidden font-sans">
-      {/* Left Panel */}
+      {}
       <div className="w-1/2 flex flex-col border-r border-[#27272A] bg-[#09090B]">
         
-        {/* Left Tabs - Minimalist high contrast */}
+        {}
         <div className="flex border-b border-[#27272A] bg-[#09090B] px-2 h-12 items-end">
           <button
             onClick={() => setActiveLeftTab('description')}
@@ -242,12 +242,12 @@ const ProblemPage = () => {
           </button>
         </div>
 
-        {/* Left Content Container */}
+        {}
         <div className="flex-1 overflow-y-auto p-6 scrollbar-thin">
           
           {activeLeftTab === 'description' && (
             <div className="space-y-6">
-              {/* Problem Metadata Header */}
+              {}
               <div className="pb-5 border-b border-[#27272A]">
                 <h1 className="text-2xl font-bold tracking-tight text-white mb-3">{problem.title}</h1>
                 <div className="flex flex-wrap gap-2 items-center">
@@ -264,12 +264,12 @@ const ProblemPage = () => {
                 </div>
               </div>
 
-              {/* Description body */}
+              {}
               <div className="prose prose-invert max-w-none text-sm text-zinc-300 leading-relaxed font-normal">
                 <div className="whitespace-pre-wrap">{problem.description}</div>
               </div>
 
-              {/* Examples section */}
+              {}
               {problem.visibleTestCases && problem.visibleTestCases.length > 0 && (
                 <div className="space-y-4 pt-4">
                   <h3 className="text-base font-bold text-white tracking-wide">Examples</h3>
@@ -365,10 +365,10 @@ const ProblemPage = () => {
         </div>
       </div>
 
-      {/* Right Panel */}
+      {}
       <div className="w-1/2 flex flex-col bg-[#09090B]">
         
-        {/* Right Tabs */}
+        {}
         <div className="flex border-b border-[#27272A] bg-[#09090B] px-2 h-12 items-end justify-between">
           <div className="flex">
             <button
@@ -412,13 +412,13 @@ const ProblemPage = () => {
           </div>
         </div>
 
-        {/* Right Content Panels */}
+        {}
         <div className="flex-1 flex flex-col overflow-hidden">
           
           {activeRightTab === 'code' && (
             <div className="flex-1 flex flex-col overflow-hidden">
               
-              {/* Language Selector Header */}
+              {}
               <div className="flex justify-between items-center px-4 py-2 border-b border-[#27272A] bg-[#18181B]">
                 <div className="flex gap-1.5">
                   {['javascript', 'python'].map((lang) => (
@@ -441,7 +441,7 @@ const ProblemPage = () => {
                 </div>
               </div>
 
-              {/* Monaco Editor Container */}
+              {}
               <div className="flex-1 relative bg-[#1E1E1E]">
                 <Editor
                   height="100%"
@@ -473,7 +473,7 @@ const ProblemPage = () => {
                 />
               </div>
 
-              {/* Action Buttons Footer */}
+              {}
               <div className="p-4 border-t border-[#27272A] bg-[#18181B] flex justify-between items-center shadow-sm">
                 <button
                   className="px-3 py-1.5 text-xs font-semibold text-zinc-400 hover:text-white hover:bg-white/5 border border-transparent hover:border-[#27272A] rounded-md transition-all"

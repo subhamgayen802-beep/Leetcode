@@ -226,7 +226,7 @@ const UpdateProblemForm = () => {
 
       <form onSubmit={handleSubmit} className="space-y-8">
 
-        {/* Basic Info */}
+        {}
         <section className="card bg-base-200 p-6 space-y-4">
           <h2 className="text-lg font-semibold border-b border-base-300 pb-2">Basic Info</h2>
 
@@ -279,7 +279,7 @@ const UpdateProblemForm = () => {
           </div>
         </section>
 
-        {/* Visible Test Cases */}
+        {}
         <TestCaseSection
           title="Visible Test Cases"
           subtitle="Shown to users as examples"
@@ -289,7 +289,7 @@ const UpdateProblemForm = () => {
           onRemove={(i) => removeTestCase('visibleTestCases', i)}
         />
 
-        {/* Hidden Test Cases */}
+        {}
         <TestCaseSection
           title="Hidden Test Cases"
           subtitle="Used for grading only"
@@ -299,7 +299,7 @@ const UpdateProblemForm = () => {
           onRemove={(i) => removeTestCase('hiddenTestCases', i)}
         />
 
-        {/* Start Code */}
+        {}
         <section className="card bg-base-200 p-6 space-y-4">
           <h2 className="text-lg font-semibold border-b border-base-300 pb-2">
             Start Code <span className="text-sm font-normal text-gray-500">— boilerplate shown to users</span>
@@ -319,7 +319,7 @@ const UpdateProblemForm = () => {
           ))}
         </section>
 
-        {/* Reference Solution */}
+        {}
         <section className="card bg-base-200 p-6 space-y-4">
           <h2 className="text-lg font-semibold border-b border-base-300 pb-2">
             Reference Solution <span className="text-sm font-normal text-gray-500">— validated against test cases on save</span>
@@ -340,7 +340,7 @@ const UpdateProblemForm = () => {
           ))}
         </section>
 
-        {/* Actions */}
+        {}
         <div className="flex justify-end gap-4 pb-10">
           <button type="button" className="btn btn-ghost" onClick={() => navigate('/admin/update')}>
             Cancel
